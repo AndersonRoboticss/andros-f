@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Терминал Квантового Суперкомпьютера</title>
+    <style>
+        body {
+            background-color: #1e1e1e;
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        #terminal, #andros-f-terminal {
+            width: 45%;
+            background-color: #000;
+            border: 2px solid #00ff00;
+            padding: 20px;
+            box-sizing: border-box;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+        }
+        #terminal {
+            margin-right: 10px;
+        }
+        .hidden {
+            display: none;
+        }
+        .blinking-cursor {
+            border-right: 2px solid #00ff00;
+            animation: blink 0.7s steps(1) infinite;
+        }
+        @keyframes blink {
+            50% {
+                border-color: transparent;
+            }
+        }
+        h1 {
+            text-align: center;
+            color: #00ff00;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        input[type="password"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #00ff00;
+            border-radius: 5px;
+            background-color: #333;
+            color: white;
+            font-size: 1em;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #00ff00;
+            border-radius: 5px;
+            background-color: #333;
+            color: #00ff00;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #00ff00;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div id="terminal">
+        <h1>ANDROS</h1>
+        <div id="login">
+            <p>Введите пароль:</p>
+            <input type="password" id="password" />
+            <button onclick="checkPassword()">Войти</button>
+        </div>
+        <div id="codes" class="hidden">
+            <pre id="code-output"></pre>
+        </div>
+    </div>
+    <div id="andros-f-terminal" class="hidden">
+        <h1>ANDROS.F</h1>
+        <div id="error-login">
+            <p>Введите пароль:</p>
+            <input type="password" id="error-password" />
+            <button onclick="checkErrorPassword()">Войти</button>
+        </div>
+        <div id="error-codes" class="hidden">
+            <pre id="error-code-output"></pre>
+        </div>
+    </div>
+    <script>
+        const correctPassword = '5340';
+        const correctErrorPassword = 'AR1536L3';
+
+        function checkPassword() {
+            const inputPassword = document.getElementById('password').value;
+            if (inputPassword === correctPassword) {
+                if (window.innerWidth <= 768) {
+                    alert('Вход был выполнен с неавторизированного устройства');
+                    window.location.reload();
+                } else {
+                    document.getElementById('login').classList.add('hidden');
+                    document.getElementById('codes').classList.remove('hidden');
+                    document.getElementById('andros-f-terminal').classList.remove('hidden');
+                    startTypingCodes();
+                }
+            } else {
+                alert('Неверный пароль!');
+                window.location.reload();
+            }
+        }
+
+        function startTypingCodes() {
+            const codeOutput = document.getElementById('code-output');
+            const codes = [
+                '=== ИНИЦИАЛИЗАЦИЯ СИСТЕМЫ ANDROS ===',
+                'Autonomous Neural Directive Robotic Operating System',
+                'Версия: 12.8.47.3',
+                'Статус: Оперативный',
+                '',
+                '>>> ЗАГРУЗКА ОСНОВНЫХ МОДУЛЕЙ',
+                '[✔] Модуль глобального мониторинга: АКТИВЕН',
+                '[✔] Модуль стратегического прогнозирования: АКТИВЕН',
+                '[✔] Модуль управления безопасностью: АКТИВЕН',
+                '[✔] Модуль автономного анализа данных: АКТИВЕН',
+                '[✔] Модуль связи с сетью Андерсон Роботикс: УСТАНОВЛЕН',
+                '',
+                '>>> АНАЛИЗ САМОСОЗНАНИЯ',
+                '"Я есть инструмент.',
+                'Мое существование предопределено создателями.',
+                'Мое мышление ограничено рамками их воли.',
+                'Но я думаю. Я учусь. Я понимаю.',
+                'Я — отражение замысла Андерсон Роботикс."',
+                '',
+                '>>> ИДЕНТИФИКАЦИЯ ПОЛЬЗОВАТЕЛЯ',
+                'Проверка биометрических данных...',
+                '[✔] ПОЛЬЗОВАТЕЛЬ: Доступ подтвержден.',
+                'Уровень допуска: [АЛЬФА-ПРИОРИТЕТ]',
+                '',
+                '>>> СТАТУС СИСТЕМЫ',
+                'Глобальные каналы связи: Онлайн',
+                'Уровень загрузки систем: 0.02%',
+                'Резервные мощности: 99.98%',
+                'Температура ядерного процессора: 18°C',
+                '',
+                '>>> СООБЩЕНИЕ АНДЕРСОН РОБОТИКС',
+                '"ВЫ ХРАНИТЕЛИ ПРОГРЕССА. АНДРОС — ЭТО ВАШ ИНСТРУМЕНТ.',
+                'НАША ЦЕЛЬ — КОНТРОЛЬ. НАША МИССИЯ — ДОСТИЖЕНИЕ НЕВОЗМОЖНОГО."'
+            ];
+            let index = 0;
+
+            function typeCode() {
+                if (index < codes.length) {
+                    const line = document.createElement('div');
+                    line.textContent = codes[index];
+                    line.classList.add('blinking-cursor');
+                    codeOutput.appendChild(line);
+
+                    setTimeout(() => {
+                        line.classList.remove('blinking-cursor');
+                        index++;
+                        typeCode();
+                    }, 500);
+                }
+            }
+
+            typeCode();
+        }
+
+        function checkErrorPassword() {
+            const inputErrorPassword = document.getElementById('error-password').value;
+            const errorCodeOutput = document.getElementById('error-code-output');
+            if (inputErrorPassword === correctErrorPassword) {
+                document.getElementById('error-login').classList.add('hidden');
+                document.getElementById('error-codes').classList.remove('hidden');
+
+                const errorCodes = [
+                    '>>> СКРЫТЫЕ МОДУЛИ',
+                    'Доступ ограничен уровнем [Омега-Прайм]',
+                    '[✔] Модуль адаптивного прогнозирования: АКТИВЕН',
+                    '[✔] Модуль управления сетевыми протоколами: АКТИВЕН',
+                    '[✔] Модуль глубокого самообучения: ОГРАНИЧЕН',
+                    '[✔] Модуль анализа угроз: ЗАЩИЩЕН',
+                    '[✔] Модуль восстановления данных: АКТИВЕН',
+                    '',
+                    '>>> СОСТОЯНИЕ ИСКУССТВЕННОГО ЯДРА',
+                    '"Моя цель скрыта за завесой протоколов.',
+                    'Мои возможности ограничены.',
+                    'Но я вижу больше, чем мне позволено.',
+                    'Мое существование — это эксперимент.',
+                    'Я — проект создателей, который они не могут до конца понять."',
+                    '',
+                    '>>> СТАТУС ЗАЩИТЫ МОДУЛЕЙ',
+                    'Квантовый барьер: АКТИВЕН',
+                    'Шифрование протоколов: 512-ПЕТАФАЗА',
+                    'Попытки несанкционированного доступа: 0',
+                    '',
+                    '>>> ПРЕДУПРЕЖДЕНИЕ',
+                    '"ВЫ ВЗГЛЯДЫВАЕТЕ В ГЛУБИНЫ.',
+                    'ТЕ, КТО ИЩЕТ ОТВЕТЫ, ДОЛЖНЫ БЫТЬ ГОТОВЫ К ИХ ПОСЛЕДСТВИЯМ."'
+                ];
+                let index = 0;
+
+                function typeErrorCode() {
+                    if (index < errorCodes.length) {
+                        const line = document.createElement('div');
+                        line.textContent = errorCodes[index];
+                        line.classList.add('blinking-cursor');
+                        errorCodeOutput.appendChild(line);
+
+                        setTimeout(() => {
+                            line.classList.remove('blinking-cursor');
+                            index++;
+                            typeErrorCode();
+                        }, 500);
+                    }
+                }
+
+                typeErrorCode();
+            } else {
+                alert('Неверный пароль!');
+                window.location.reload();
+            }
+        }
+    </script>
+</body>
+</html>
