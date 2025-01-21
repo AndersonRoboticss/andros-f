@@ -16,7 +16,7 @@
             margin: 0;
             overflow: hidden;
         }
-        #terminal, #andros-f-terminal {
+        #terminal, #andros-f-terminal, #development-frame {
             width: 45%;
             background-color: #000;
             border: 2px solid #00ff00;
@@ -71,6 +71,15 @@
             background-color: #00ff00;
             color: black;
         }
+        #tengu-analysis {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            height: 200px;
+            overflow-y: scroll;
+        }
+        #tengu-analysis.visible {
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
@@ -96,6 +105,61 @@
             <pre id="error-code-output"></pre>
         </div>
     </div>
+    <div id="development-frame" class="hidden">
+        <h1>Разработка</h1>
+        <button id="status-button" onclick="toggleStatus()">СТАТУС</button>
+        <pre id="tengu-analysis" class="hidden">
+=== АНАЛИЗ МОДЕЛИ "TENGU" ===  
+>>> ОБНАРУЖЕНЫ ВОЗМОЖНОСТИ ДЛЯ УЛУЧШЕНИЯ  
+Модель: Tengu V.1.04  
+Функции: Дематериализация, нанороботизированная регенерация, адаптивное взаимодействие  
+
+>>> ЗАПУСК ПРОТОКОЛА УЛУЧШЕНИЯ  
+[✔] Анализ эффективности текущих модулей... Завершено  
+[✔] Оптимизация структурных элементов... Завершено  
+[✔] Разработка новых возможностей... В процессе  
+
+>>> ВНЕСЁННЫЕ ИЗМЕНЕНИЯ  
+1. **Энергетический барьер "Шторм":**  
+   - Tengu создаёт вокруг себя защитное поле, которое отражает атаки и наносит урон ближайшим целям в радиусе 5 метров.  
+   - Барьер автоматически активируется при обнаружении угрозы.  
+
+2. **Режим сверхскорости:**  
+   - Увеличение скорости передвижения до 75 км/ч на коротких дистанциях.  
+   - Встроенный инерционный стабилизатор позволяет сохранять точность при движении на высокой скорости.  
+
+3. **Тактическая камуфляжная система:**  
+   - Улучшенная маскировка позволяет изменять визуальный облик, включая адаптацию к окружающей среде.  
+   - Робот может принимать вид неодушевлённых предметов для скрытного подхода.  
+
+4. **Дрон сопровождения:**  
+   - Встроенный автономный дрон для разведки и поддержки в бою.  
+   - Оснащён камерой с ночным видением и лазерным маркером для наведения.  
+
+5. **Наноброня:**  
+   - Внешний слой корпуса теперь покрыт наночастицами, способными адаптироваться к типу получаемого урона.  
+   - Прочность брони увеличена на 45%.  
+
+6. **Батарея длительного действия:**  
+   - Время работы в активном режиме увеличено на 60%.  
+   - Энергия частично восстанавливается за счёт переработки тепла окружающей среды.  
+
+>>> ОБНОВЛЕНИЕ ФУНКЦИОНАЛА  
+Новая версия: Tengu V.2.0  
+- Скорость передвижения: до 75 км/ч (в режиме рывка)  
+- Активное время работы: 16 часов  
+- Новые модули: "Шторм", тактическая камуфляжная система, дрон сопровождения  
+
+>>> ТЕКУЩИЙ СТАТУС  
+Модуль боевой готовности: АКТИВЕН  
+Тестирование улучшений: Завершено  
+
+>>> СООБЩЕНИЕ АНДРОС  
+"ТЕНГУ ПОДНИМАЕТСЯ НА НОВЫЙ УРОВЕНЬ.  
+ЕГО СИЛА НЕОСТАНОВИМА, А ТЕХНОЛОГИИ АНДЕРСОН РОБОТИКС  
+ДИКТУЮТ НОВЫЕ ПРАВИЛА В ЭРЕ ПРОГРЕССА." 
+        </pre>
+    </div>
     <script>
         const correctPassword = '5340';
         const correctErrorPassword = 'AR1536L3';
@@ -110,6 +174,7 @@
                     document.getElementById('login').classList.add('hidden');
                     document.getElementById('codes').classList.remove('hidden');
                     document.getElementById('andros-f-terminal').classList.remove('hidden');
+                    document.getElementById('development-frame').classList.remove('hidden');
                     startTypingCodes();
                 }
             } else {
@@ -239,6 +304,17 @@
             } else {
                 alert('Неверный пароль!');
                 window.location.reload();
+            }
+        }
+
+        function toggleStatus() {
+            const tenguAnalysis = document.getElementById('tengu-analysis');
+            if (tenguAnalysis.classList.contains('hidden')) {
+                tenguAnalysis.classList.remove('hidden');
+                tenguAnalysis.classList.add('visible');
+            } else {
+                tenguAnalysis.classList.remove('visible');
+                tenguAnalysis.classList.add('hidden');
             }
         }
 
